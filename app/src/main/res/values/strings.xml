@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">M\'eat-Time</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    //strings for loginpage
+
+    <string name="quote_eng">More than just food.</string>
+    <string name="lost_password">Lost password</string>
+    <string name="sign_up">Sign up here</string>
+    <string name="logfb">Sign in with Facebook</string>
+    <string name="logg">Sign in with Google</string>
+    <string name="sign_in">Sign in</string>
+    <string name="fire">Fire</string>
+    
+    // strings for Password recovery
+    
+    <string name="e_mail">E-mail</string>
+
+</resources>

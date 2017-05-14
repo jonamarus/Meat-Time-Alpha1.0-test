@@ -1,0 +1,133 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".LoginActivity"
+    android:orientation="vertical"
+    android:background="@color/blue">
+
+
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="91dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo"
+        android:layout_gravity="center"
+        android:background="#02496b"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/quote_eng"
+        android:id="@+id/textView"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:singleLine="true"
+        android:textColor="#ffffffff" />
+
+
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:textColorHint="#ffffff"
+        android:textColor="#ffffff"
+        android:id="@+id/editText"
+        android:capitalize="none"
+        android:hint="E-mail"
+        android:singleLine="true"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:paddingLeft="15dp"
+         />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:hint="Password"
+        android:fontFamily=""
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:textColorHint="#ffffff"
+        android:paddingLeft="15dp"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_in"
+        android:text="@string/sign_in"
+        android:textColor="#ffffff"
+        android:background="@drawable/button_signin4"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:paddingLeft="35dp"
+        android:id="@+id/sign_in_fd"
+        android:background="@drawable/button_fblogin_small2"
+        android:text="@string/logfb"
+        android:textSize="13dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_in_fb"
+        android:background="@drawable/button_glogin_small"
+        android:text="@string/logg"
+        android:textColor="#ffffff"
+        android:paddingLeft="35dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    >
+
+    <TextView
+        android:id="@+id/pwrecovery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lost_password"
+        android:textColor="#ffffff"
+        android:gravity="left"
+        android:textSize="18dp"
+        android:clickable="true"/>
+
+
+    <TextView
+        android:id="@+id/signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:textColor="#ffffff"
+        android:gravity="right"
+        android:textSize="18dp"
+        android:clickable="true"/>
+</RelativeLayout>
+
+
+</LinearLayout>
+
+
+
+
