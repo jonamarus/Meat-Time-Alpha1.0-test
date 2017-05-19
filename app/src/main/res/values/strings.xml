@@ -12,7 +12,8 @@
     <string name="logfb">Sign in with Facebook</string>
     <string name="logg">Sign in with Google</string>
     <string name="sign_in">Sign in</string>
-    <string name="fire">Fire</string>
+    <string name="dialog_message">fire</string>
+    <string name="dialog_title">yolo</string>
     
     // strings for Password recovery
     

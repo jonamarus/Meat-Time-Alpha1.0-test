@@ -72,7 +72,8 @@
         android:textColor="#ffffff"
         android:background="@drawable/button_signin4"
         android:layout_gravity="center"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="25dp"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -84,7 +85,8 @@
         android:text="@string/logfb"
         android:textSize="13dp"
         android:layout_gravity="center"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="35dp"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -95,7 +97,8 @@
         android:textColor="#ffffff"
         android:paddingLeft="35dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        style="?android:attr/borderlessButtonStyle"/>
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -103,26 +106,34 @@
     android:gravity="bottom"
     >
 
-    <TextView
+
+
+
+    <Button
         android:id="@+id/pwrecovery"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lost_password"
         android:textColor="#ffffff"
-        android:gravity="left"
-        android:textSize="18dp"
-        android:clickable="true"/>
+        android:textSize="15dp"
+        android:layout_alignParentLeft="true"
+        android:clickable="true"
+        android:background="@color/blue"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
-    <TextView
+
+    <Button
         android:id="@+id/signup"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
         android:textColor="#ffffff"
-        android:gravity="right"
-        android:textSize="18dp"
-        android:clickable="true"/>
+        android:textSize="15dp"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:background="@color/blue"
+        style="?android:attr/borderlessButtonStyle"/>
 </RelativeLayout>
 
 
