@@ -3,10 +3,13 @@ package com.example.android.meat_timealpha10;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +24,10 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
     Button pwrecovery;
+    Button signup;
     Context context;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,20 +39,57 @@ public class LoginActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
+
+
          context = this;
         pwrecovery=(Button) findViewById(R.id.pwrecovery);
+
+        final View myView = View.inflate(this, R.layout.pwrecovery, null);
+
         pwrecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final AlertDialog.Builder builder = new  AlertDialog.Builder(context);
+
+//Eerste knop in de custom Alert
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+
+                    }
+
+
+                });
+// tweede knop in de custom alert
+                builder.setPositiveButton(R.string.send_pwd, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+
+                    }
+                });
+
+                builder.setView(myView);
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+            }
+
+        });
+
+        // alertdialoog twee voor registratie
+        signup=(Button) findViewById(R.id.signup);
+        signup.setOnClickListener(new View.OnClickListener()
+
+            {
+                @Override
+                public void onClick (View v){
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage(R.string.dialog_message)
                         .setTitle(R.string.dialog_title);
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
-        });
-
-
+            });
 
     }
 
