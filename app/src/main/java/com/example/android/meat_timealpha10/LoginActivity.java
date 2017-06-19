@@ -44,7 +44,7 @@ public class LoginActivity extends Activity {
          context = this;
         pwrecovery=(Button) findViewById(R.id.pwrecovery);
 
-        final View myView = View.inflate(this, R.layout.pwrecovery, null);
+        final View pwrecview = View.inflate(this, R.layout.pwrecovery, null);
 
         pwrecovery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +68,7 @@ public class LoginActivity extends Activity {
                     }
                 });
 
-                builder.setView(myView);
+                builder.setView(pwrecview);
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
@@ -78,18 +78,40 @@ public class LoginActivity extends Activity {
 
         // alertdialoog twee voor registratie
         signup=(Button) findViewById(R.id.signup);
+
+        final View signupview = View.inflate(this, R.layout.signup, null);
+
         signup.setOnClickListener(new View.OnClickListener()
 
             {
                 @Override
                 public void onClick (View v){
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage(R.string.dialog_message)
-                        .setTitle(R.string.dialog_title);
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-            });
+                    //Eerste knop in de custom Alert
+                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+
+                        }
+
+
+                    });
+// tweede knop in de custom alert
+                    builder.setPositiveButton(R.string.register, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+
+                        }
+                    });
+
+                    builder.setView(signupview);
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+
+        });
+
 
     }
 

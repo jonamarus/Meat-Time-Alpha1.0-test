@@ -4,6 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+
     //strings for loginpage
 
     <string name="quote_eng">More than just food.</string>
@@ -21,5 +22,17 @@
     <string name="e_mail">Enter your e-mail here</string>
     <string name="send_pwd">Send</string>
     <string name="cancel">Cancel</string>
+
+    // strings for registration
+
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+    <string name="first_name">first name</string>
+    <string name="last_name">last name</string>
+    <string name="register_pw">password</string>
+    <string name="register_mail">e-mail</string>
+
+
+
 
 </resources>
