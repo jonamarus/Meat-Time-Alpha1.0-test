@@ -86,10 +86,12 @@ public class LoginActivity extends Activity {
             {
                 @Override
                 public void onClick (View v){
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     //Eerste knop in de custom Alert
                     builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+
+                                dialog.dismiss();
 
 
                         }
@@ -100,7 +102,7 @@ public class LoginActivity extends Activity {
                     builder.setPositiveButton(R.string.register, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
 
-
+                            dialog.dismiss();
                         }
                     });
 
