@@ -22,7 +22,6 @@
 
     <EditText
         android:id="@+id/first_name"
-        android:text="@string/first_name"
         android:inputType="text"
         android:singleLine="true"
         android:layout_width="match_parent"
@@ -33,11 +32,10 @@
         android:layout_marginBottom="4dp"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
-        android:hint="@string/e_mail"/>
+        android:hint="@string/first_name"/>
 
     <EditText
         android:id="@+id/last_name"
-        android:inputType="text"
         android:text="@string/last_name"
         android:singleLine="true"
         android:layout_width="match_parent"
@@ -48,12 +46,11 @@
         android:layout_marginBottom="4dp"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
-        android:hint="@string/e_mail"/>
+        android:hint="@string/last_name"/>
 
     <EditText
         android:id="@+id/register_mail"
         android:inputType="textEmailAddress"
-        android:text="@string/register_mail"
         android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -63,11 +60,10 @@
         android:layout_marginBottom="4dp"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
-        android:hint="@string/e_mail"/>
+        android:hint="@string/register_mail"/>
 
     <EditText
         android:id="@+id/register_pw"
-        android:text="@string/register_pw"
         android:inputType="textPassword"
         android:singleLine="true"
         android:layout_width="match_parent"
@@ -78,11 +74,10 @@
         android:layout_marginBottom="4dp"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
-        android:hint="@string/e_mail"/>
+        android:hint="@string/register_pw"/>
 
     <EditText
         android:id="@+id/register_pw_check"
-        android:text="@string/register_pw"
         android:inputType="textPassword"
         android:singleLine="true"
         android:layout_width="match_parent"
@@ -93,6 +88,6 @@
         android:layout_marginBottom="4dp"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
-        android:hint="@string/e_mail"/>
+        android:hint="@string/rep_register_pw"/>
 
 </LinearLayout>
