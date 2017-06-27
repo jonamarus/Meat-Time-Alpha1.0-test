@@ -34,5 +34,3 @@ build/
 
 #NDK
 obj/
-
-build\.gradle
