@@ -26,9 +26,11 @@ import butterknife.OnClick;
 
 public class LoginActivity extends Activity implements PasswordRecoveryFragment.UserNameListener {
   @BindView(R.id.pwrecovery)
-  Button pwrecovery;
+  private Button pwrecovery;
 
-  Button signup;
+  @BindView(R.id.signup)
+  private Button signup;
+
   Context context;
 
   @Override
@@ -105,6 +107,13 @@ public class LoginActivity extends Activity implements PasswordRecoveryFragment.
 
     PasswordRecoveryFragment editNameDialog = new PasswordRecoveryFragment();
     editNameDialog.show(manager, "fragment_edit_name");
+  }
+
+  @OnClick(R.id.sign_in_fb)
+  public void startFbSignUp(){
+    Log.d("Login activity", "Starting fb login");
+
+
   }
 
   @Override

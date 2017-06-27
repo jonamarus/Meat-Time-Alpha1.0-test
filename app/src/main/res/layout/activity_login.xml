@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
         android:paddingLeft="35dp"
-        android:id="@+id/sign_in_fd"
+        android:id="@+id/sign_in_fb"
         android:background="@drawable/button_fblogin_small2"
         android:text="@string/logfb"
         android:textSize="13dp"
@@ -100,7 +100,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sign_in_fb"
+        android:id="@+id/sign_in_google"
         android:background="@drawable/button_glogin_small"
         android:text="@string/logg"
         android:textColor="#ffffff"
