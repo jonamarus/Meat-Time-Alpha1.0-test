@@ -30,4 +30,6 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'com.android.support:customtabs:25.3.0'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.android.support:customtabs:25.3.0'
 }

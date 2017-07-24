@@ -69,12 +69,21 @@ public class LoginActivity extends FragmentActivity implements PasswordRecoveryF
 
     {
     fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+    fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
       @Override
       public void onSuccess(LoginResult loginResult) {
         //Send to backend
         Log.d("FACEBOOK", loginResult.getAccessToken().getToken());
       }
 
+      @Override
+      public void onCancel() {
+        // App code
+      }
+
+      @Override
+      public void onError(FacebookException exception) {
+        // App code
       @Override
       public void onCancel() {
         // App code
