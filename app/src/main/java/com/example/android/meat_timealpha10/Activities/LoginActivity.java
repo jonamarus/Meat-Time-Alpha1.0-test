@@ -65,10 +65,6 @@ public class LoginActivity extends FragmentActivity implements PasswordRecoveryF
 
     final View signupview = View.inflate(this, R.layout.signup, null);
 
-    signup.setOnClickListener(new View.OnClickListener()
-
-    {
-    fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
     fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
       @Override
       public void onSuccess(LoginResult loginResult) {
@@ -83,27 +79,16 @@ public class LoginActivity extends FragmentActivity implements PasswordRecoveryF
 
       @Override
       public void onError(FacebookException exception) {
-        // App code
-      @Override
-      public void onCancel() {
-        // App code
-      }
 
-      @Override
-      public void onError(FacebookException exception) {
-        // App code
       }
     });
-
-    final View signupview = View.inflate(this, R.layout.signup, null);
-
   }
 
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    callbackManager.onActivityResult(requestCode, resultCode, data);
-  }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+      super.onActivityResult(requestCode, resultCode, data);
+      callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
 
   @OnClick(R.id.pwrecovery)
   public void startPwRecovery(View view) {
