@@ -6,7 +6,9 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,20 +20,30 @@ import android.widget.Toast;
 
 import com.example.android.meat_timealpha10.Fragments.PasswordRecoveryFragment;
 import com.example.android.meat_timealpha10.R;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class LoginActivity extends Activity implements PasswordRecoveryFragment.UserNameListener {
+public class LoginActivity extends FragmentActivity implements PasswordRecoveryFragment.UserNameListener {
   @BindView(R.id.pwrecovery)
   Button pwrecovery;
+
+  @BindView(R.id.login_button)
+  public LoginButton fbLoginBtn;
 
   @BindView(R.id.signup)
   Button signup;
 
   Context context;
+  CallbackManager callbackManager;
 
 
   @Override
@@ -45,6 +57,7 @@ public class LoginActivity extends Activity implements PasswordRecoveryFragment.
     setContentView(R.layout.activity_login);
 
     ButterKnife.bind(this);
+    callbackManager = CallbackManager.Factory.create();
 
 
     // alertdialoog twee voor registratie
@@ -55,49 +68,46 @@ public class LoginActivity extends Activity implements PasswordRecoveryFragment.
     signup.setOnClickListener(new View.OnClickListener()
 
     {
+    fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
       @Override
-      public void onClick(View v) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        //Eerste knop in de custom Alert
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-          public void onClick(DialogInterface dialog, int id) {
-
-            dialog.dismiss();
-
-
-          }
-
-        });
-// tweede knop in de custom alert
-        builder.setPositiveButton(R.string.register, new DialogInterface.OnClickListener() {
-          public void onClick(DialogInterface dialog, int id) {
-
-            dialog.dismiss();
-          }
-        });
-
-        builder.setView(signupview);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+      public void onSuccess(LoginResult loginResult) {
+        //Send to backend
+        Log.d("FACEBOOK", loginResult.getAccessToken().getToken());
       }
 
+      @Override
+      public void onCancel() {
+        // App code
+      }
+
+      @Override
+      public void onError(FacebookException exception) {
+        // App code
+      }
     });
 
+    final View signupview = View.inflate(this, R.layout.signup, null);
 
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    callbackManager.onActivityResult(requestCode, resultCode, data);
   }
 
   @OnClick(R.id.pwrecovery)
   public void startPwRecovery(View view) {
-    Log.d("TAG", "Password Recovery");
+    Log.d("LoginActivity", "Password Recovery");
+
     FragmentManager manager = getFragmentManager();
-    Fragment frag = manager.findFragmentByTag("fragment_edit_name");
+    Fragment frag = manager.findFragmentByTag("fragment_password_recovery");
     if (frag != null) {
       manager.beginTransaction().remove(frag).commit();
     }
 
-    PasswordRecoveryFragment editNameDialog = new PasswordRecoveryFragment();
-    editNameDialog.show(manager, "fragment_edit_name");
+    PasswordRecoveryFragment passwordRecoveryDialog = new PasswordRecoveryFragment();
+    passwordRecoveryDialog.show(manager, "fragment_password_recovery");
   }
 
   @OnClick(R.id.signup)
@@ -111,13 +121,6 @@ public class LoginActivity extends Activity implements PasswordRecoveryFragment.
 
     PasswordRecoveryFragment editNameDialog = new PasswordRecoveryFragment();
     editNameDialog.show(manager, "fragment_edit_name");
-  }
-
-  @OnClick(R.id.sign_in_fb)
-  public void startFbSignUp(){
-    Log.d("Login activity", "Starting fb login");
-
-
   }
 
   @Override

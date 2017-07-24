@@ -10,7 +10,6 @@
     android:orientation="vertical"
     android:background="@color/blue">
 
-
     <ImageView
         android:layout_width="99dp"
         android:layout_height="91dp"
@@ -50,16 +49,6 @@
     <EditText
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:capitalize="none"
-        android:singleLine="true"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"
-        />
-
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
         android:ems="10"
         android:id="@+id/editText2"
         android:hint="Password"
@@ -84,7 +73,7 @@
         android:layout_marginTop="25dp"
         style="?android:attr/borderlessButtonStyle"/>
 
-    <Button
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
@@ -107,9 +96,17 @@
         android:paddingLeft="35dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        style="?android:attr/borderlessButtonStyle"/>
+        style="?android:attr/borderlessButtonStyle"/>      -->
 
-<RelativeLayout
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
+
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
