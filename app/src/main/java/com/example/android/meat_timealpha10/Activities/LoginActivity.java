@@ -26,12 +26,13 @@ import butterknife.OnClick;
 
 public class LoginActivity extends Activity implements PasswordRecoveryFragment.UserNameListener {
   @BindView(R.id.pwrecovery)
-  private Button pwrecovery;
+  Button pwrecovery;
 
   @BindView(R.id.signup)
-  private Button signup;
+  Button signup;
 
   Context context;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,9 @@ public class LoginActivity extends Activity implements PasswordRecoveryFragment.
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setContentView(R.layout.activity_login);
+
     ButterKnife.bind(this);
+
 
     // alertdialoog twee voor registratie
     signup = (Button) findViewById(R.id.signup);
@@ -80,6 +83,7 @@ public class LoginActivity extends Activity implements PasswordRecoveryFragment.
       }
 
     });
+
 
   }
 

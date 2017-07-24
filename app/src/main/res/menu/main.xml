@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.android.meat_timealpha10.MainActivity">
+    tools:context="com.example.android.meat_timealpha10.Activities.MainActivity">
     <item android:id="@+id/action_example" android:title="@string/action_example"
         app:showAsAction="withText|ifRoom" />
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
