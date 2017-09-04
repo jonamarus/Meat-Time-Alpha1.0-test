@@ -37,14 +37,13 @@ public class LoginActivity extends FragmentActivity implements PasswordRecoveryF
   Button pwrecovery;
 
   @BindView(R.id.login_button)
-  public LoginButton fbLoginBtn;
+  LoginButton fbLoginBtn;
 
   @BindView(R.id.signup)
   Button signup;
 
   Context context;
   CallbackManager callbackManager;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,6 @@ public class LoginActivity extends FragmentActivity implements PasswordRecoveryF
 
     ButterKnife.bind(this);
     callbackManager = CallbackManager.Factory.create();
-
 
     // alertdialoog twee voor registratie
     signup = (Button) findViewById(R.id.signup);

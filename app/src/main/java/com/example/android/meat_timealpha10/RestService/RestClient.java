@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestClient {
 
-  public static final String BASE_URL = "";
+  public static final String BASE_URL = "http://localhost:3000";
   private static Retrofit retrofit = null;
 
   public static Retrofit getClient() {

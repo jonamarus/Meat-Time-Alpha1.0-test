@@ -2,6 +2,7 @@ package com.example.android.meat_timealpha10.RestService;
 
 import com.example.android.meat_timealpha10.Models.RegisterModel;
 
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
@@ -12,6 +13,9 @@ import retrofit2.http.POST;
 public interface RestService {
 
   @POST("/auth/register")
-  void register(@Body RegisterModel register);
+  Call<String> register(@Body RegisterModel register);
+
+  @POST("/auth/password-reset")
+  Call<String> resetPassword(@Body String email);
 
 }
