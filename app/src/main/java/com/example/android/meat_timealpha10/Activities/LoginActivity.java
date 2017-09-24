@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.android.meat_timealpha10.Fragments.PasswordRecoveryFragment;
+import com.example.android.meat_timealpha10.Fragments.RegisterFragment;
 import com.example.android.meat_timealpha10.R;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -32,18 +33,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class LoginActivity extends FragmentActivity implements PasswordRecoveryFragment.UserNameListener {
+public class LoginActivity extends FragmentActivity {
   @BindView(R.id.pwrecovery)
-  Button pwrecovery;
+  public Button pwrecovery;
 
   @BindView(R.id.login_button)
-  LoginButton fbLoginBtn;
+  public LoginButton fbLoginBtn;
 
   @BindView(R.id.signup)
-  Button signup;
+  public Button signup;
 
-  Context context;
-  CallbackManager callbackManager;
+  public Context context;
+  public CallbackManager callbackManager;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -106,18 +107,14 @@ public class LoginActivity extends FragmentActivity implements PasswordRecoveryF
   public void startSignUp(View view) {
     Log.d("TAG", "Sign Up");
     FragmentManager manager = getFragmentManager();
-    Fragment frag = manager.findFragmentByTag("fragment_edit_name");
+
+    Fragment frag = manager.findFragmentByTag("fragment_password_recovery");
     if (frag != null) {
       manager.beginTransaction().remove(frag).commit();
     }
 
-    PasswordRecoveryFragment editNameDialog = new PasswordRecoveryFragment();
-    editNameDialog.show(manager, "fragment_edit_name");
-  }
-
-  @Override
-  public void onFinishUserDialog(String user) {
-    Toast.makeText(this, "Hello, " + user, Toast.LENGTH_SHORT).show();
+    RegisterFragment registerFragment = new RegisterFragment();
+    registerFragment.show(manager, "register_fragment");
   }
 
   @Override

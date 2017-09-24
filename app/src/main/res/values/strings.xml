@@ -19,8 +19,8 @@
 
     // strings for Password recovery
 
-    <string name="pwrecovery">Password Recovery</string>
-    <string name="e_mail">Enter your e-mail here</string>
+    <string name="pwreset">Password Reset</string>
+    <string name="e_mail">Email</string>
     <string name="send_pwd">Send</string>
     <string name="cancel">Cancel</string>
 
@@ -28,11 +28,11 @@
 
     <string name="register">Register</string>
     <string name="registration">Registration</string>
-    <string name="first_name">first name</string>
-    <string name="last_name">last name</string>
-    <string name="register_pw">password</string>
-    <string name="rep_register_pw">repeat password</string>
-    <string name="register_mail">e-mail</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="register_pw">Password</string>
+    <string name="rep_register_pw">Repeat password</string>
+    <string name="register_mail">E-mail</string>
     <string name="title_activity_main">MainActivity</string>
 
     // Drawer
@@ -52,6 +52,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sendButton">Send</string>
-
+    <string name="reset_token">Reset Token</string>
+    <string name="pwreset_new_password">New Password</string>
+    <string name="pwreset_repeat_password">Repeat Password</string>
+    <string name="pwrecovery_text">Please enter your emailadres to recieve the password reset token</string>
 
 </resources>

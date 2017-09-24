@@ -1,93 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/blue">
-
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <TextView
         android:id="@+id/registration"
-        android:text="@string/registration"
-        android:textSize="30dp"
-        android:textAlignment="gravity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:focusable="false"
-        android:textColor="#ffffff"
         android:background="@drawable/shadow"
-
-        />
+        android:focusable="false"
+        android:gravity="center"
+        android:text="@string/registration"
+        android:textAlignment="gravity"
+        android:textSize="30sp"/>
 
     <EditText
         android:id="@+id/first_name"
-        android:inputType="text"
-        android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:hint="@string/first_name"/>
+        android:layout_marginTop="16dp"
+        android:hint="@string/first_name"
+        android:inputType="text"
+        android:maxLines="1"/>
 
     <EditText
         android:id="@+id/last_name"
-        android:text="@string/last_name"
-        android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:hint="@string/last_name"/>
+        android:layout_marginTop="16dp"
+        android:hint="@string/last_name"
+        android:maxLines="1"/>
 
     <EditText
         android:id="@+id/register_mail"
-        android:inputType="textEmailAddress"
-        android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:hint="@string/register_mail"/>
+        android:layout_marginTop="16dp"
+        android:hint="@string/register_mail"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"/>
 
     <EditText
         android:id="@+id/register_pw"
-        android:inputType="textPassword"
-        android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:hint="@string/register_pw"/>
+        android:layout_marginTop="16dp"
+        android:hint="@string/register_pw"
+        android:inputType="textPassword"
+        android:maxLines="1"/>
 
     <EditText
         android:id="@+id/register_pw_check"
-        android:inputType="textPassword"
-        android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:hint="@string/rep_register_pw"/>
+        android:layout_marginTop="16dp"
+        android:hint="@string/rep_register_pw"
+        android:inputType="textPassword"
+        android:maxLines="1"/>
 
 </LinearLayout>
