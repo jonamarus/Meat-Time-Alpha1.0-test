@@ -1,11 +1,8 @@
 package com.example.android.meat_timealpha10.Activities;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -16,24 +13,36 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.meat_timealpha10.Fragments.PasswordRecoveryFragment;
 import com.example.android.meat_timealpha10.Fragments.RegisterFragment;
+import com.example.android.meat_timealpha10.Models.TokenModel;
 import com.example.android.meat_timealpha10.R;
+import com.example.android.meat_timealpha10.RestService.RestClient;
+import com.example.android.meat_timealpha10.RestService.RestService;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.Password;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
-public class LoginActivity extends FragmentActivity {
+public class LoginActivity extends FragmentActivity implements Validator.ValidationListener{
   @BindView(R.id.pwrecovery)
   public Button pwrecovery;
 
@@ -43,7 +52,17 @@ public class LoginActivity extends FragmentActivity {
   @BindView(R.id.signup)
   public Button signup;
 
+  @BindView(R.id.login_email)
+  @Email
+  public EditText email;
+
+  @BindView(R.id.login_password)
+  @Password()
+  public EditText password;
+
+  public RestService restService;
   public Context context;
+  public Validator validator;
   public CallbackManager callbackManager;
 
   @Override
@@ -57,12 +76,12 @@ public class LoginActivity extends FragmentActivity {
     setContentView(R.layout.activity_login);
 
     ButterKnife.bind(this);
+    restService = RestClient.getClient().create(RestService.class);
+
+    validator = new Validator(this);
+    validator.setValidationListener(this);
+
     callbackManager = CallbackManager.Factory.create();
-
-    // alertdialoog twee voor registratie
-    signup = (Button) findViewById(R.id.signup);
-
-    final View signupview = View.inflate(this, R.layout.signup, null);
 
     fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
       @Override
@@ -117,6 +136,30 @@ public class LoginActivity extends FragmentActivity {
     registerFragment.show(manager, "register_fragment");
   }
 
+  @OnClick(R.id.sign_in)
+  public void submitLogin(){
+    validator.validate();
+  }
+
+  public void login(){
+    Log.d("LOG IN", "Logging in ");
+    Call<TokenModel> call = restService.login(email.getText().toString(), password.getText().toString());
+    call.enqueue(new Callback<TokenModel>() {
+      @Override
+      public void onResponse(Call<TokenModel> call, Response<TokenModel> response) {
+        if (response.isSuccessful())
+          Log.d("TOKEN", response.body().getToken());
+        else
+          Log.d("FAILURE", "Failed to login");
+      }
+
+      @Override
+      public void onFailure(Call<TokenModel> call, Throwable t) {
+        Log.d("CallBack", " Throwable is " + t);
+      }
+    });
+  }
+
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
@@ -137,5 +180,25 @@ public class LoginActivity extends FragmentActivity {
     }
 
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public void onValidationSucceeded() {
+    login();
+  }
+
+  @Override
+  public void onValidationFailed(List<ValidationError> errors) {
+    for (ValidationError error : errors) {
+      View view = error.getView();
+      String message = error.getCollatedErrorMessage(context);
+
+      // Display error messages ;)
+      if (view instanceof EditText) {
+        ((EditText) view).setError(message);
+      } else {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+      }
+    }
   }
 }

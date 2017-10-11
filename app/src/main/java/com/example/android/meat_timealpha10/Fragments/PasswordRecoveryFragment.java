@@ -3,14 +3,13 @@ package com.example.android.meat_timealpha10.Fragments;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +26,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,12 +73,11 @@ public class PasswordRecoveryFragment extends DialogFragment implements Validato
                   Toast.LENGTH_LONG);
           PasswordResetFragment nextFrag= new PasswordResetFragment();
 
-          nextFrag.show(getFragmentManager(), "password_reset_framgent");
+          nextFrag.show(getFragmentManager(), "password_reset_fragment");
           dismiss();
         }else {
           email.setError("User with this email not found");
         }
-
         Log.d("CallBack", " response is " + response);
       }
 
@@ -99,6 +95,17 @@ public class PasswordRecoveryFragment extends DialogFragment implements Validato
     View view = inflater.inflate(R.layout.fragment_password_recovery, container);
 
     ButterKnife.bind(this, view);
+
+    email.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+      @Override
+      public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+          submitForm();
+          return true;
+        }
+        return false;
+      }
+    });
 
     // set this instance as callback for editor action
     getDialog().getWindow().setSoftInputMode(

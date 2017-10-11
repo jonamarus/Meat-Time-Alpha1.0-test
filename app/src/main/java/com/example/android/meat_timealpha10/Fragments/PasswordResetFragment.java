@@ -3,11 +3,14 @@ package com.example.android.meat_timealpha10.Fragments;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.meat_timealpha10.R;
@@ -67,6 +70,17 @@ public class PasswordResetFragment extends DialogFragment implements Validator.V
     View view = inflater.inflate(R.layout.fragment_password_reset, container);
 
     ButterKnife.bind(this, view);
+
+    passwordRepeat.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+      @Override
+      public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+          submitForm();
+          return true;
+        }
+        return false;
+      }
+    });
 
     // set this instance as callback for editor action
     getDialog().getWindow().setSoftInputMode(

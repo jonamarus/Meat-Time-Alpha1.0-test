@@ -20,11 +20,7 @@ import com.example.android.meat_timealpha10.R;
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-
     private CharSequence mTitle;
-
-
-
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -35,13 +31,10 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -140,7 +133,6 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;

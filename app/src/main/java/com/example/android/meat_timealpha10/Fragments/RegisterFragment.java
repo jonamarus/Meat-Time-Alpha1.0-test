@@ -1,17 +1,21 @@
 package com.example.android.meat_timealpha10.Fragments;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.app.DialogFragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.meat_timealpha10.Models.RegisterModel;
+import com.example.android.meat_timealpha10.Models.User;
 import com.example.android.meat_timealpha10.R;
 import com.example.android.meat_timealpha10.RestService.RestClient;
 import com.example.android.meat_timealpha10.RestService.RestService;
@@ -50,7 +54,7 @@ public class RegisterFragment extends DialogFragment implements Validator.Valida
   public EditText email;
 
   @NotEmpty
-  @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
+  @Password(scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
   @BindView(R.id.register_pw)
   public EditText password;
 
@@ -82,6 +86,17 @@ public class RegisterFragment extends DialogFragment implements Validator.Valida
     View view = inflater.inflate(R.layout.fragment_register, container);
     ButterKnife.bind(this, view);
 
+    passwordCheck.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+      @Override
+      public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+          submitForm();
+          return true;
+        }
+        return false;
+      }
+    });
+
     // set this instance as callback for editor action
     getDialog().getWindow().setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -105,26 +120,26 @@ public class RegisterFragment extends DialogFragment implements Validator.Valida
                     email.getText().toString(),
                     password.getText().toString());
 
-    Call<String> call = restService.register(registerModel);
-    call.enqueue(new Callback<String>(){
+    Call<User> call = restService.register(registerModel);
+    call.enqueue(new Callback<User>(){
 
       @Override
-      public void onResponse(Call<String> call, Response<String> response) {
+      public void onResponse(Call<User> call, Response<User> response) {
         if (response.isSuccessful()){
+          Log.d("REGISTER", "User created successfuly");
           Toast.makeText(context, "Account successfully created",
                   Toast.LENGTH_LONG);
 
           dismiss();
         }else {
           Log.d("REGISTER", response.message());
-          email.setError("User with this email not found");
         }
 
         Log.d("CallBack", " response is " + response);
       }
 
       @Override
-      public void onFailure(Call<String> call, Throwable t) {
+      public void onFailure(Call<User> call, Throwable t) {
         Log.d("CallBack", " Throwable is " + t);
       }
     });
