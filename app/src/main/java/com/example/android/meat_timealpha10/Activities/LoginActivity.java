@@ -22,6 +22,7 @@ import com.example.android.meat_timealpha10.Models.TokenModel;
 import com.example.android.meat_timealpha10.R;
 import com.example.android.meat_timealpha10.RestService.RestClient;
 import com.example.android.meat_timealpha10.RestService.RestService;
+import com.example.android.meat_timealpha10.helpers.TokenHelper;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -75,6 +76,8 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setContentView(R.layout.activity_login);
 
+    context = getApplicationContext();
+
     ButterKnife.bind(this);
     restService = RestClient.getClient().create(RestService.class);
 
@@ -86,13 +89,13 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
     fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
       @Override
       public void onSuccess(LoginResult loginResult) {
-        //Send to backend
+        facebookLogin();
         Log.d("FACEBOOK", loginResult.getAccessToken().getToken());
       }
 
       @Override
       public void onCancel() {
-        // App code
+
       }
 
       @Override
@@ -102,11 +105,33 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
     });
   }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-      super.onActivityResult(requestCode, resultCode, data);
-      callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
+  public void facebookLogin(){
+    Call<TokenModel> call = restService.facebookLogin();
+
+    call.enqueue(new Callback<TokenModel>() {
+      @Override
+      public void onResponse(Call<TokenModel> call, Response<TokenModel> response) {
+        if (response.isSuccessful()) {
+          TokenHelper.setToken(response.body().getToken(), context);
+          Log.d("TOKEN", response.body().getToken());
+          Intent intent = new Intent(context, MainActivity.class);
+          startActivity(intent);
+        }else
+          Log.d("FAILURE", "Failed to login");
+      }
+
+      @Override
+      public void onFailure(Call<TokenModel> call, Throwable t) {
+        Log.d("CallBack", " Throwable is " + t);
+      }
+    });
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    callbackManager.onActivityResult(requestCode, resultCode, data);
+  }
 
   @OnClick(R.id.pwrecovery)
   public void startPwRecovery(View view) {
@@ -147,9 +172,12 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
     call.enqueue(new Callback<TokenModel>() {
       @Override
       public void onResponse(Call<TokenModel> call, Response<TokenModel> response) {
-        if (response.isSuccessful())
+        if (response.isSuccessful()) {
+          TokenHelper.setToken(response.body().getToken(), context);
           Log.d("TOKEN", response.body().getToken());
-        else
+          Intent intent = new Intent(context, MainActivity.class);
+          startActivity(intent);
+        }else
           Log.d("FAILURE", "Failed to login");
       }
 
