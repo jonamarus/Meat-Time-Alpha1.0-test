@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.meat_timealpha10.Fragments.PasswordRecoveryFragment;
-import com.example.android.meat_timealpha10.Fragments.RegisterFragment;
 import com.example.android.meat_timealpha10.Models.TokenModel;
 import com.example.android.meat_timealpha10.R;
 import com.example.android.meat_timealpha10.RestService.RestClient;
@@ -89,7 +88,7 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
     fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
       @Override
       public void onSuccess(LoginResult loginResult) {
-        facebookLogin();
+        facebookLogin(loginResult.getAccessToken().toString());
         Log.d("FACEBOOK", loginResult.getAccessToken().getToken());
       }
 
@@ -105,8 +104,8 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
     });
   }
 
-  public void facebookLogin(){
-    Call<TokenModel> call = restService.facebookLogin();
+  public void facebookLogin(String accessToken){
+    Call<TokenModel> call = restService.facebookLogin(accessToken);
 
     call.enqueue(new Callback<TokenModel>() {
       @Override
@@ -149,16 +148,8 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
 
   @OnClick(R.id.signup)
   public void startSignUp(View view) {
-    Log.d("TAG", "Sign Up");
-    FragmentManager manager = getFragmentManager();
-
-    Fragment frag = manager.findFragmentByTag("fragment_password_recovery");
-    if (frag != null) {
-      manager.beginTransaction().remove(frag).commit();
-    }
-
-    RegisterFragment registerFragment = new RegisterFragment();
-    registerFragment.show(manager, "register_fragment");
+    Intent intent = new Intent(context, RegisterActivity.class);
+    startActivity(intent);
   }
 
   @OnClick(R.id.sign_in)

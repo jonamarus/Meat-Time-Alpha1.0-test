@@ -28,7 +28,7 @@ public interface RestService {
   @POST("auth/login")
   Call<TokenModel> login(@Field("email") String email, @Field("password") String password);
 
-  @GET("auth/facebook/callback")
-  Call<TokenModel> facebookLogin();
+  @GET("auth/facebook")
+  Call<TokenModel> facebookLogin(@Field("accessToken") String accessToken);
 
 }
