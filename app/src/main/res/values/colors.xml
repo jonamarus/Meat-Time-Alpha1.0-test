@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><item name="blue" type="color">#02496b</item></resources>
+<resources>
+    <item name="blue" type="color">#02496b</item>
+
+    <color name="black_overlay">#66000000</color>
+</resources>

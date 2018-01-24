@@ -1,34 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/blue"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-
-   >
     <TextView
-        android:text="@string/pwrecovery"
-        android:textSize="30dp"
-        android:textAlignment="gravity"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:focusable="false"
-        android:background="@drawable/shadow"
-        android:textColor="#ffffff"
-
-       />
-    <TextView
-
         android:textSize="30dp"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:scaleType="center"
         android:textColor="#ffffff"
-
         />
+
     <EditText
         android:id="@+id/pwrecovery_email"
         android:inputType="textEmailAddress"
@@ -41,8 +25,6 @@
         android:hint="@string/e_mail"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
-
-
          />
 
-</LinearLayout>
+</RelativeLayout>

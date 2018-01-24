@@ -14,12 +14,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.meat_timealpha10.Models.RegisterModel;
+import com.example.android.meat_timealpha10.Models.User;
 import com.example.android.meat_timealpha10.R;
 import com.example.android.meat_timealpha10.RestService.RestClient;
 import com.example.android.meat_timealpha10.RestService.RestService;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
 import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Password;
 
 import java.util.List;
 
@@ -30,21 +35,40 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class PasswordRecoveryFragment extends DialogFragment implements Validator.ValidationListener{
-
-  @BindView(R.id.pwrecovery_email)
-  @Email
-  public EditText email;
-
-  public Context context;
+public class RegisterFragment extends DialogFragment implements Validator.ValidationListener {
   public RestService restService;
+  public Context context;
   public Validator validator;
 
-  // Empty constructor required for DialogFragment
-  public PasswordRecoveryFragment() {}
+  @NotEmpty
+  @BindView(R.id.first_name)
+  public EditText firstName;
 
-  public void onCreate(Bundle savedInstanceState){
+  @NotEmpty
+  @BindView(R.id.last_name)
+  public EditText lastName;
+
+  @NotEmpty
+  @Email
+  @BindView(R.id.register_mail)
+  public EditText email;
+
+  @NotEmpty
+  @Password(scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
+  @BindView(R.id.register_pw)
+  public EditText password;
+
+  @NotEmpty
+  @ConfirmPassword
+  @BindView(R.id.register_pw_check)
+  public EditText passwordCheck;
+
+  public RegisterFragment() {
+    // Required empty public constructor
+  }
+
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     restService = RestClient.getClient().create(RestService.class);
@@ -56,47 +80,13 @@ public class PasswordRecoveryFragment extends DialogFragment implements Validato
     setStyle(DialogFragment.STYLE_NORMAL, R.style.cust_dialog);
   }
 
-  @OnClick(R.id.send)
-  public void submitForm(){
-    validator.validate();
-  }
-
-  public void sendEmail(){
-    Log.d("PASSWORD_RECOVERY", email.getText().toString());
-
-    Call<String> call = restService.resetPassword(email.getText().toString());
-    call.enqueue(new Callback<String>() {
-      @Override
-      public void onResponse(Call<String> call, Response<String> response) {
-        if (response.isSuccessful()){
-          Toast.makeText(context, "An email has been sent to this emailadres with a reset token",
-                  Toast.LENGTH_LONG);
-          PasswordResetFragment nextFrag= new PasswordResetFragment();
-
-          nextFrag.show(getFragmentManager(), "password_reset_fragment");
-          dismiss();
-        }else {
-          email.setError("User with this email not found");
-        }
-        Log.d("CallBack", " response is " + response);
-      }
-
-      @Override
-      public void onFailure(Call<String> call, Throwable t) {
-        //Toast.makeText(context, "A Network error occured", Toast.LENGTH_LONG).show();
-        Log.d("CallBack", " Throwable is " + t);
-      }
-    });
-  }
-
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_password_recovery, container);
-
+    View view = inflater.inflate(R.layout.fragment_register, container);
     ButterKnife.bind(this, view);
 
-    email.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+    passwordCheck.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -110,15 +100,54 @@ public class PasswordRecoveryFragment extends DialogFragment implements Validato
     // set this instance as callback for editor action
     getDialog().getWindow().setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-    getDialog().setTitle(getString(R.string.pwreset));
+    getDialog().setTitle(getString(R.string.register));
 
     return view;
   }
 
+  @OnClick(R.id.send)
+  public void submitForm(){
+    validator.validate();
+  }
+
+  public void register(){
+    Log.d("REGISTER", "Register a new user");
+
+    RegisterModel registerModel =
+            new RegisterModel(
+                    firstName.getText().toString(),
+                    lastName.getText().toString(),
+                    email.getText().toString(),
+                    password.getText().toString());
+
+    Call<User> call = restService.register(registerModel);
+    call.enqueue(new Callback<User>(){
+
+      @Override
+      public void onResponse(Call<User> call, Response<User> response) {
+        if (response.isSuccessful()){
+          Log.d("REGISTER", "User created successfuly");
+          Toast.makeText(context, "Account successfully created",
+                  Toast.LENGTH_LONG);
+
+          dismiss();
+        }else {
+          Log.d("REGISTER", response.message());
+        }
+
+        Log.d("CallBack", " response is " + response);
+      }
+
+      @Override
+      public void onFailure(Call<User> call, Throwable t) {
+        Log.d("CallBack", " Throwable is " + t);
+      }
+    });
+  }
+
   @Override
   public void onValidationSucceeded() {
-    sendEmail();
+    register();
   }
 
   @Override
@@ -135,4 +164,6 @@ public class PasswordRecoveryFragment extends DialogFragment implements Validato
       }
     }
   }
+
+
 }
